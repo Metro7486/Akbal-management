@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akbal Management | Talent Application</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --surface-color: #16161a;
+            --gold-accent: #d4af37;
+            --gold-hover: #b5952f;
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: radial-gradient(circle at 50% 0%, #1a1a24 0%, transparent 70%);
+        }
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .lang-btn {
+            padding: 8px 16px;
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-btn.active {
+            background-color: var(--gold-accent);
+            color: var(--bg-color);
+        }
+        .container { width: 100%; max-width: 480px; padding: 40px 20px; text-align: center; }
+        .logo { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 600; color: var(--gold-accent); margin-bottom: 10px; letter-spacing: 2px; }
+        .subtitle { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 40px; }
+        .hero-text { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; font-weight: 300; }
+        .hero-text strong { font-weight: 600; color: var(--gold-accent); }
+        .membership-note { font-size: 0.8rem; color: var(--text-muted); }
+        .form-container {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label {
+            display: block; font-size: 0.8rem; color: var(--text-muted);
+            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .input-group input {
+            width: 100%; padding: 14px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px; color: var(--text-main);
+            font-family: 'Montserrat', sans-serif; font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus { outline: none; border-color: var(--gold-accent); background-color: rgba(255, 255, 255, 0.05); }
+        .submit-btn {
+            width: 100%; padding: 16px;
+            background-color: var(--gold-accent); color: var(--bg-color);
+            border: none; border-radius: 6px;
+            font-family: 'Montserrat', sans-serif; font-size: 1rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            cursor: pointer; transition: background-color 0.3s ease; margin-top: 10px;
+        }
+        .submit-btn:hover { background-color: var(--gold-hover); }
+        .footer-tags { margin-top: 40px; font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; }
+        #loading, #success-message, #error-message { display: none; margin-top: 20px; font-size: 0.9rem; }
+        #success-message { color: #4bb543; }
+        #error-message { color: #ff3333; }
+    </style>
+</head>
+<body>
+
+    <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+
+    <div class="container">
+        <div class="logo">AKBAL</div>
+        <div class="subtitle">Management</div>
+
+        <p class="hero-text" id="hero-text"></p>
+
+        <div class="form-container">
+            <form id="application-form">
+                <div class="input-group">
+                    <label for="name" id="label-name"></label>
+                    <input type="text" id="name" name="nombre" required>
+                </div>
+                <div class="input-group">
+                    <label for="email" id="label-email"></label>
+                    <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                </div>
+                <div class="input-group">
+                    <label for="whatsapp" id="label-whatsapp"></label>
+                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="+52 123 456 7890">
+                </div>
+                <button type="submit" class="submit-btn" id="submit-btn"></button>
+            </form>
+            <div id="loading"></div>
+            <div id="success-message"></div>
+            <div id="error-message"></div>
+        </div>
+
+        <div class="footer-tags">📍 Tulum · Riviera Maya · Cancun</div>
+    </div>
+
+    <script>
+        const i18n = {
+            es: {
+                hero: 'Conviértete en una <strong>Arquitecta de Experiencias</strong>.<br><br>Únete a la agencia de Social Concierge más exclusiva. Ingresa tus datos para ser considerada en nuestra próxima fase de selección.<br><span class="membership-note">Membership by application only.</span>',
+                labelName: 'Nombre Completo o IG Handle',
+                placeholderName: 'Ej. @tu_usuario',
+                labelEmail: 'Correo Electrónico',
+                labelWhatsapp: 'WhatsApp (Con código de país)',
+                submit: 'Solicitar Acceso',
+                loading: 'Procesando solicitud...',
+                success: '✓ Solicitud recibida. Nos pondremos en contacto contigo pronto.',
+                error: '✕ Hubo un error al enviar tus datos. Por favor, intenta de nuevo.'
+            },
+            en: {
+                hero: 'Become an <strong>Experience Architect</strong>.<br><br>Join the most exclusive Social Concierge agency. Enter your details to be considered for our next selection phase.<br><span class="membership-note">Membership by application only.</span>',
+                labelName: 'Full Name or IG Handle',
+                placeholderName: 'e.g. @your_handle',
+                labelEmail: 'Email Address',
+                labelWhatsapp: 'WhatsApp (With country code)',
+                submit: 'Request Access',
+                loading: 'Processing request...',
+                success: '✓ Application received. We will be in touch soon.',
+                error: '✕ There was an error submitting your info. Please try again.'
+            }
+        };
+
+        function setLang(lang) {
+            const t = i18n[lang];
+            document.documentElement.lang = lang;
+            document.getElementById('hero-text').innerHTML = t.hero;
+            document.getElementById('label-name').textContent = t.labelName;
+            document.getElementById('name').placeholder = t.placeholderName;
+            document.getElementById('label-email').textContent = t.labelEmail;
+            document.getElementById('label-whatsapp').textContent = t.labelWhatsapp;
+            document.getElementById('submit-btn').textContent = t.submit;
+            document.getElementById('loading').textContent = t.loading;
+            document.getElementById('success-message').textContent = t.success;
+            document.getElementById('error-message').textContent = t.error;
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        }
+
+        setLang('es');
+
+        const SHEET_BEST_URL = 'https://api.sheetbest.com/sheets/7f735168-7076-4c70-9015-6ddd6d01ef5c';
+        const form = document.getElementById('application-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const loading = document.getElementById('loading');
+        const successMsg = document.getElementById('success-message');
+        const errorMsg = document.getElementById('error-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            submitBtn.style.display = 'none';
+            loading.style.display = 'block';
+
+            const formData = new FormData(form);
+            const data = {
+                Fecha: new Date().toLocaleString('es-MX'),
+                Nombre: formData.get('nombre'),
+                Email: formData.get('email'),
+                WhatsApp: formData.get('whatsapp')
+            };
+
+            try {
+                const response = await fetch(SHEET_BEST_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                if (response.ok) {
+                    form.reset();
+                    loading.style.display = 'none';
+                    successMsg.style.display = 'block';
+                } else { throw new Error('Network error'); }
+            } catch (error) {
+                console.error('Error:', error);
+                loading.style.display = 'none';
+                submitBtn.style.display = 'block';
+                errorMsg.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
