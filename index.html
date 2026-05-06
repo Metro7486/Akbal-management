@@ -372,19 +372,6 @@
                 // Firebase Registration
                 await addDoc(collection(db, "talent_applications"), data);
                 
-                // Fallback/Legacy Sheet Registration (Optional but kept for redundancy)
-                fetch('https://api.sheetbest.com/sheets/7f735168-7076-4c70-9015-6ddd6d01ef5c', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        Fecha: new Date().toLocaleString('es-MX'),
-                        Nombre: data.nombre,
-                        Instagram: data.instagram,
-                        Email: data.email,
-                        WhatsApp: data.whatsapp
-                    }),
-                }).catch(err => console.error('Sheet sync failed', err));
-
                 form.reset();
                 loading.style.display = 'none';
                 successMsg.style.display = 'block';
