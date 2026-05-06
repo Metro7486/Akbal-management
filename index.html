@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         :root {
             --bg-color: #FAF9F6;
@@ -33,6 +34,7 @@
                 radial-gradient(circle at 50% -20%, #ffffff 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #f3f0e8 0%, transparent 40%);
             padding-top: 80px;
+            opacity: 0; /* GSAP will fade this in */
         }
         
         body::before {
@@ -83,13 +85,6 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo { 
@@ -142,6 +137,12 @@
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+        }
+        
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 50px -10px rgba(197, 160, 89, 0.15);
         }
         
         .form-container::before {
@@ -163,6 +164,7 @@
             display: block; font-size: 0.65rem; color: var(--text-muted);
             margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
         .input-group input {
             width: 100%; padding: 14px;
@@ -170,13 +172,24 @@
             border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 8px; color: var(--text-main);
             font-family: 'Montserrat', sans-serif; font-size: 0.9rem;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
+        
+        .input-group input:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
         .input-group input:focus { 
             outline: none; 
             border-color: var(--gold-accent); 
-            background-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 10px rgba(197, 160, 89, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.15);
+            transform: scale(1.01);
+        }
+
+        .input-group input:focus + label,
+        .input-group:focus-within label {
+            color: var(--gold-dark);
         }
         
         .submit-btn {
@@ -194,9 +207,14 @@
         }
         
         .submit-btn:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
-            filter: brightness(1.05);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.35);
+            filter: brightness(1.1);
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2);
         }
 
         .submit-btn::after {
@@ -204,7 +222,7 @@
             position: absolute;
             top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
             transform: rotate(45deg);
             transition: 0.7s;
             left: -150%;
@@ -241,18 +259,18 @@
 </head>
 <body>
 
-    <div class="lang-toggle">
+    <div class="lang-toggle gsap-fade">
         <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
         <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
     </div>
 
     <div class="container">
-        <div class="logo">AKBAL</div>
-        <div class="subtitle">Management</div>
+        <div class="logo gsap-stagger">AKBAL</div>
+        <div class="subtitle gsap-stagger">Management</div>
 
-        <p class="hero-text" id="hero-text"></p>
+        <p class="hero-text gsap-stagger" id="hero-text"></p>
 
-        <div class="form-container">
+        <div class="form-container gsap-stagger">
             <form id="application-form">
                 <div class="input-group">
                     <label for="name" id="label-name"></label>
@@ -277,7 +295,7 @@
             <div id="error-message"></div>
         </div>
 
-        <div class="footer-tags">📍 Tulum · Riviera Maya · Cancun</div>
+        <div class="footer-tags gsap-stagger">📍 Tulum · Riviera Maya · Cancun</div>
     </div>
 
     <script type="module">
@@ -382,6 +400,40 @@
                 errorMsg.style.display = 'block';
             }
         });
+
+        // --- PREMIUM ANIMATIONS (GSAP) ---
+        window.onload = () => {
+            // Fade in body to prevent FOUC
+            gsap.to("body", { opacity: 1, duration: 0.5 });
+
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+            // Language toggle fade down
+            tl.from(".gsap-fade", { 
+                y: -20, 
+                opacity: 0, 
+                duration: 0.8 
+            }, 0.2);
+
+            // Staggered entrance for main content
+            tl.from(".gsap-stagger", {
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15
+            }, 0.1);
+
+            // Magnetic effect on inputs (subtle float on hover)
+            const inputs = document.querySelectorAll('.input-group input');
+            inputs.forEach(input => {
+                input.addEventListener('mouseenter', () => {
+                    gsap.to(input, { y: -2, duration: 0.3, ease: "power2.out" });
+                });
+                input.addEventListener('mouseleave', () => {
+                    gsap.to(input, { y: 0, duration: 0.3, ease: "power2.out" });
+                });
+            });
+        };
     </script>
 </body>
 </html>
