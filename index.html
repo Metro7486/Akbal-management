@@ -4,273 +4,319 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akbal Management | Talent Application</title>
+    <meta name="description" content="Akbal Management — Talent Application.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         :root {
-            --bg-color: #FAF9F6;
-            --surface-color: rgba(255, 255, 255, 0.6);
-            --gold-accent: #c5a059;
-            --gold-bright: #d4af37;
-            --gold-dark: #8e6d2d;
-            --text-main: #1a1a1a;
-            --text-muted: #666666;
-            --glass-border: rgba(197, 160, 89, 0.15);
+            --bg: #ffffff;
+            --bg-tint: #fbfbfb;
+            --hairline: #f1f1f1;
+            --hairline-strong: #e6e6e6;
+            --ghost: #ededed;
+            --whisper: #d4d4d4;
+            --mid: #9a9a9a;
+            --ink: #111111;
+            --ink-soft: #2a2a2a;
+            --serif: 'Cormorant Garamond', 'Cormorant', serif;
+            --sans: 'Inter', system-ui, -apple-system, sans-serif;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); }
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: var(--sans);
+            color: var(--ink);
             min-height: 100vh;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 50% -20%, #ffffff 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, #f3f0e8 0%, transparent 40%);
-            padding-top: 80px;
-            opacity: 0; /* GSAP will fade this in */
+            padding: 80px 24px 60px;
+            opacity: 0; /* GSAP fade-in handles entrance */
         }
-        
+
+        ::selection { background: var(--ink); color: var(--bg); }
+
+        /* Subtle ambient gradient — barely perceptible, gives depth without breaking white */
         body::before {
             content: "";
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.04;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 90% 60% at 50% 0%, rgba(0,0,0,0.012), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,0,0,0.008), transparent 60%);
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
 
         .lang-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 28px;
+            right: 28px;
             display: flex;
-            background: rgba(0, 0, 0, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 30px;
-            padding: 4px;
+            gap: 2px;
             z-index: 100;
+            padding: 3px;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid var(--hairline);
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
         }
         .lang-btn {
             padding: 6px 14px;
             background: transparent;
-            color: var(--text-muted);
+            color: var(--whisper);
             border: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border-radius: 20px;
+            transition: color 0.4s ease;
+            border-radius: 999px;
         }
+        .lang-btn:hover { color: var(--mid); }
         .lang-btn.active {
-            background-color: var(--gold-accent);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+            color: var(--ink);
         }
 
-        .container { 
-            width: 100%; 
-            max-width: 500px; 
-            padding: 40px 25px; 
+        .container {
+            width: 100%;
+            max-width: 460px;
             text-align: center;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
-        .logo { 
-            font-family: 'Cinzel', serif; 
-            font-size: 2.8rem; 
-            font-weight: 400; 
-            color: var(--gold-accent); 
-            margin-bottom: 5px; 
-            letter-spacing: 8px;
-            background: linear-gradient(to bottom, var(--gold-dark), var(--gold-bright));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        .logo {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 8vw, 4.2rem);
+            font-weight: 300;
+            letter-spacing: 0.32em;
+            color: var(--ink);
+            line-height: 1;
+            margin-bottom: 14px;
+            margin-right: -0.32em; /* compensate the trailing tracking */
         }
-        .subtitle { 
-            font-size: 0.7rem; 
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            letter-spacing: 6px; 
-            margin-bottom: 40px;
+        .subtitle {
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 400;
+            color: var(--whisper);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 64px;
+        }
+
+        .hero-text {
+            font-family: var(--serif);
+            font-size: clamp(1.15rem, 3.2vw, 1.4rem);
+            font-weight: 300;
+            color: var(--ink-soft);
+            line-height: 1.55;
+            margin-bottom: 16px;
+            letter-spacing: 0.005em;
+        }
+        .hero-text strong {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--ink);
+        }
+        .hero-text br + br { display: none; }
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: 12.5px;
+            font-weight: 300;
+            color: var(--mid);
+            line-height: 1.7;
+            margin-bottom: 28px;
+            letter-spacing: 0.02em;
+        }
+        .membership-note {
+            display: block;
+            margin-top: 32px;
+            font-family: var(--sans);
+            font-size: 9px;
+            color: var(--whisper);
+            text-transform: uppercase;
+            letter-spacing: 4px;
             font-weight: 400;
         }
-        .hero-text { 
-            font-size: 1rem; 
-            line-height: 1.8; 
-            margin-bottom: 30px; 
-            font-weight: 300; 
-            color: #444;
-            letter-spacing: 0.5px;
-        }
-        .hero-text strong { font-weight: 600; color: var(--gold-dark); }
-        
-        .membership-note { 
-            display: block;
-            margin-top: 20px;
-            font-size: 0.65rem; 
-            color: var(--gold-dark); 
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.8;
-            font-weight: 500;
+
+        .divider {
+            width: 32px;
+            height: 1px;
+            background: var(--hairline-strong);
+            margin: 48px auto 40px;
         }
 
         .form-container {
-            background: var(--surface-color);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            padding: 0;
+        }
+        .input-group {
             position: relative;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            margin-bottom: 28px;
         }
-        
-        .form-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 50px -10px rgba(197, 160, 89, 0.15);
-        }
-        
-        .form-container::before {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
-            animation: shimmer-border 4s infinite linear;
-        }
-        
-        @keyframes shimmer-border {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label {
-            display: block; font-size: 0.65rem; color: var(--text-muted);
-            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px;
-            font-weight: 600;
-            transition: color 0.3s ease;
+            display: block;
+            font-family: var(--sans);
+            font-size: 9px;
+            color: var(--whisper);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            transition: color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .input-group input {
-            width: 100%; padding: 14px;
-            background-color: rgba(0, 0, 0, 0.015);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 8px; color: var(--text-main);
-            font-family: 'Montserrat', sans-serif; font-size: 0.9rem;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            width: 100%;
+            padding: 6px 0 12px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--hairline-strong);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 0.01em;
+            transition: border-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-radius: 0;
         }
-        
-        .input-group input:hover {
-            background-color: rgba(255, 255, 255, 0.5);
+        .input-group input::placeholder {
+            color: var(--ghost);
+            font-weight: 300;
         }
-
-        .input-group input:focus { 
-            outline: none; 
-            border-color: var(--gold-accent); 
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 15px rgba(197, 160, 89, 0.15);
-            transform: scale(1.01);
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--ink);
         }
-
-        .input-group input:focus + label,
         .input-group:focus-within label {
-            color: var(--gold-dark);
+            color: var(--ink-soft);
         }
-        
-        .submit-btn {
-            width: 100%; padding: 16px;
-            background: linear-gradient(135deg, var(--gold-accent), var(--gold-dark));
-            color: #fff;
-            border: none; border-radius: 8px;
-            font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-            cursor: pointer; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            margin-top: 10px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .submit-btn:hover { 
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.35);
-            filter: brightness(1.1);
-        }
-
-        .submit-btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2);
-        }
-
-        .submit-btn::after {
+        /* underline reveal on focus */
+        .input-group::after {
             content: "";
             position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            transition: 0.7s;
-            left: -150%;
+            bottom: 0;
+            left: 0;
+            height: 1px;
+            width: 0;
+            background: var(--ink);
+            transition: width 0.55s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .submit-btn:hover::after {
-            left: 100%;
+        .input-group:focus-within::after { width: 100%; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 17px 24px;
+            background: var(--ink);
+            color: var(--bg);
+            border: 1px solid var(--ink);
+            border-radius: 0;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            cursor: pointer;
+            transition: background 0.45s ease, color 0.45s ease, transform 0.45s ease, letter-spacing 0.55s ease;
+            margin-top: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .submit-btn:hover {
+            background: var(--bg);
+            color: var(--ink);
+            letter-spacing: 5.5px;
+        }
+        .submit-btn:active {
+            transform: scale(0.985);
+        }
+        .submit-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            letter-spacing: 4px;
         }
 
-        .footer-tags { 
-            margin-top: 50px; 
-            font-size: 0.65rem; 
-            color: var(--text-muted); 
-            letter-spacing: 4px; 
+        .footer-tags {
+            margin-top: 64px;
+            font-family: var(--sans);
+            font-size: 9px;
+            color: var(--whisper);
+            letter-spacing: 4px;
             text-transform: uppercase;
-            opacity: 0.7;
+            font-weight: 400;
         }
-        #loading, #success-message, #error-message { 
-            display: none; 
-            margin-top: 25px; 
-            font-size: 0.8rem; 
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        .footer-tags::before, .footer-tags::after {
+            content: "·";
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--ghost);
         }
-        #success-message { color: #2e7d32; }
-        #error-message { color: #c62828; }
-        
+
+        #loading, #success-message, #error-message {
+            display: none;
+            margin-top: 28px;
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-align: center;
+        }
+        #loading { color: var(--mid); }
+        #success-message {
+            color: var(--ink);
+            font-family: var(--serif);
+            font-size: 18px;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        #error-message { color: var(--ink-soft); }
+
+        /* GSAP setup classes */
+        .reveal { opacity: 0; }
+        .input-group { opacity: 0; }
+
         @media (max-width: 480px) {
-            body { padding-top: 60px; }
-            .logo { font-size: 2.2rem; }
-            .form-container { padding: 30px 20px; }
-            .lang-toggle { top: 15px; right: 15px; }
+            body { padding: 60px 20px 40px; }
+            .lang-toggle { top: 18px; right: 18px; }
+            .logo { letter-spacing: 0.25em; }
+            .subtitle { margin-bottom: 48px; letter-spacing: 5px; }
+            .divider { margin: 36px auto 32px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="lang-toggle gsap-fade">
+    <div class="lang-toggle reveal">
         <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
         <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
     </div>
 
     <div class="container">
-        <div class="logo gsap-stagger">AKBAL</div>
-        <div class="subtitle gsap-stagger">Management</div>
+        <div class="logo reveal">AKBAL</div>
+        <div class="subtitle reveal">Management</div>
 
-        <p class="hero-text gsap-stagger" id="hero-text"></p>
+        <p class="hero-text reveal" id="hero-text"></p>
 
-        <div class="form-container gsap-stagger">
+        <div class="divider reveal" aria-hidden="true"></div>
+
+        <div class="form-container reveal">
             <form id="application-form">
                 <div class="input-group">
                     <label for="name" id="label-name"></label>
@@ -295,7 +341,7 @@
             <div id="error-message"></div>
         </div>
 
-        <div class="footer-tags gsap-stagger">📍 Tulum · Riviera Maya · Cancun</div>
+        <div class="footer-tags reveal">Tulum &nbsp;·&nbsp; Riviera Maya &nbsp;·&nbsp; Cancun</div>
     </div>
 
     <script type="module">
@@ -309,7 +355,8 @@
 
         const i18n = {
             es: {
-                hero: 'Conviértete en una <strong>Arquitecta de Experiencias</strong>.<br><br>Únete a la agencia de Social Concierge más exclusiva. Ingresa tus datos para ser considerada en nuestra próxima fase de selección.<br><span class="membership-note">Membership by application only.</span>',
+                hero: 'Conviértete en una <strong>Arquitecta de Experiencias</strong>.',
+                heroSub: 'Únete a la agencia de Social Concierge más exclusiva. Ingresa tus datos para ser considerada en nuestra próxima fase de selección.<span class="membership-note">Membership by application only</span>',
                 labelName: 'Nombre Completo',
                 placeholderName: 'Tu nombre completo',
                 labelInstagram: 'Instagram',
@@ -318,11 +365,12 @@
                 labelWhatsapp: 'WhatsApp (Con código de país)',
                 submit: 'Solicitar Acceso',
                 loading: 'Procesando solicitud...',
-                success: '✓ Solicitud recibida. Nos pondremos en contacto contigo pronto.',
-                error: '✕ Hubo un error al enviar tus datos. Por favor, intenta de nuevo.'
+                success: '“Solicitud recibida.<br>Nos pondremos en contacto contigo.”',
+                error: 'Hubo un error al enviar tus datos. Intenta de nuevo.'
             },
             en: {
-                hero: 'Become an <strong>Experience Architect</strong>.<br><br>Join the most exclusive Social Concierge agency. Enter your details to be considered for our next selection phase.<br><span class="membership-note">Membership by application only.</span>',
+                hero: 'Become an <strong>Experience Architect</strong>.',
+                heroSub: 'Join the most exclusive Social Concierge agency. Enter your details to be considered for our next selection phase.<span class="membership-note">Membership by application only</span>',
                 labelName: 'Full Name',
                 placeholderName: 'Your full name',
                 labelInstagram: 'Instagram',
@@ -331,16 +379,26 @@
                 labelWhatsapp: 'WhatsApp (With country code)',
                 submit: 'Request Access',
                 loading: 'Processing request...',
-                success: '✓ Application received. We will be in touch soon.',
-                error: '✕ There was an error submitting your info. Please try again.'
+                success: '“Application received.<br>We will be in touch.”',
+                error: 'There was an error submitting your info. Please try again.'
             }
         };
+
+        // Ensure a hero-sub element exists right after hero-text for the longer paragraph
+        let heroSubEl = document.getElementById('hero-sub');
+        if (!heroSubEl) {
+            heroSubEl = document.createElement('p');
+            heroSubEl.id = 'hero-sub';
+            heroSubEl.className = 'hero-sub reveal';
+            document.getElementById('hero-text').insertAdjacentElement('afterend', heroSubEl);
+        }
 
         window.setLang = function(lang) {
             currentLang = lang;
             const t = i18n[lang];
             document.documentElement.lang = lang;
             document.getElementById('hero-text').innerHTML = t.hero;
+            heroSubEl.innerHTML = t.heroSub;
             document.getElementById('label-name').textContent = t.labelName;
             document.getElementById('name').placeholder = t.placeholderName;
             document.getElementById('label-instagram').textContent = t.labelInstagram;
@@ -349,7 +407,7 @@
             document.getElementById('label-whatsapp').textContent = t.labelWhatsapp;
             document.getElementById('submit-btn').textContent = t.submit;
             document.getElementById('loading').textContent = t.loading;
-            document.getElementById('success-message').textContent = t.success;
+            document.getElementById('success-message').innerHTML = t.success;
             document.getElementById('error-message').textContent = t.error;
             document.getElementById('btn-es').classList.toggle('active', lang === 'es');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
@@ -367,8 +425,9 @@
             e.preventDefault();
             successMsg.style.display = 'none';
             errorMsg.style.display = 'none';
-            submitBtn.style.display = 'none';
-            loading.style.display = 'block';
+            submitBtn.disabled = true;
+            const originalLabel = submitBtn.textContent;
+            submitBtn.textContent = i18n[currentLang].loading;
 
             const formData = new FormData(form);
             const payload = {
@@ -389,50 +448,99 @@
 
                 if (error) throw error;
 
-                form.reset();
-                loading.style.display = 'none';
-                successMsg.style.display = 'block';
+                // Premium success transition: fade form out, then fade success in
+                gsap.to(form, {
+                    opacity: 0,
+                    y: -8,
+                    duration: 0.6,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        form.style.display = 'none';
+                        successMsg.style.display = 'block';
+                        gsap.fromTo(successMsg,
+                            { opacity: 0, y: 8 },
+                            { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
+                        );
+                    }
+                });
             } catch (error) {
                 console.error('Submission error:', error);
-                loading.style.display = 'none';
-                submitBtn.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalLabel;
                 errorMsg.style.display = 'block';
+                gsap.fromTo(errorMsg, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
             }
         });
 
-        // --- PREMIUM ANIMATIONS (GSAP) ---
-        window.onload = () => {
-            // Fade in body to prevent FOUC
-            gsap.to("body", { opacity: 1, duration: 0.5 });
+        // ============ PREMIUM ENTRANCE ANIMATIONS ============
+        window.addEventListener('load', () => {
+            gsap.to('body', { opacity: 1, duration: 0.4, ease: 'power1.out' });
 
-            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+            const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
-            // Language toggle fade down
-            tl.from(".gsap-fade", { 
-                y: -20, 
-                opacity: 0, 
-                duration: 0.8 
-            }, 0.2);
+            tl.fromTo('.lang-toggle',
+                { opacity: 0, y: -8 },
+                { opacity: 1, y: 0, duration: 0.9 },
+                0.05
+            );
 
-            // Staggered entrance for main content
-            tl.from(".gsap-stagger", {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.15
-            }, 0.1);
+            tl.fromTo('.logo',
+                { opacity: 0, y: 14, filter: 'blur(8px)', letterSpacing: '0.45em' },
+                { opacity: 1, y: 0, filter: 'blur(0px)', letterSpacing: '0.32em', duration: 1.4 },
+                0.15
+            );
+            tl.fromTo('.subtitle',
+                { opacity: 0, y: 8, letterSpacing: '12px' },
+                { opacity: 1, y: 0, letterSpacing: '6px', duration: 1.2 },
+                0.45
+            );
+            tl.fromTo('.hero-text',
+                { opacity: 0, y: 14, filter: 'blur(4px)' },
+                { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.1 },
+                0.7
+            );
+            tl.fromTo('#hero-sub',
+                { opacity: 0, y: 8 },
+                { opacity: 1, y: 0, duration: 0.9 },
+                0.95
+            );
+            tl.fromTo('.divider',
+                { opacity: 0, scaleX: 0 },
+                { opacity: 1, scaleX: 1, duration: 0.9, transformOrigin: '50% 50%' },
+                1.15
+            );
+            tl.fromTo('.form-container',
+                { opacity: 0 },
+                { opacity: 1, duration: 0.6 },
+                1.3
+            );
+            tl.fromTo('.input-group',
+                { opacity: 0, y: 12 },
+                { opacity: 1, y: 0, duration: 0.9, stagger: 0.09 },
+                1.35
+            );
+            tl.fromTo('.submit-btn',
+                { opacity: 0, y: 12 },
+                { opacity: 1, y: 0, duration: 0.9 },
+                1.85
+            );
+            tl.fromTo('.footer-tags',
+                { opacity: 0 },
+                { opacity: 1, duration: 0.9 },
+                2.0
+            );
 
-            // Magnetic effect on inputs (subtle float on hover)
-            const inputs = document.querySelectorAll('.input-group input');
-            inputs.forEach(input => {
-                input.addEventListener('mouseenter', () => {
-                    gsap.to(input, { y: -2, duration: 0.3, ease: "power2.out" });
-                });
-                input.addEventListener('mouseleave', () => {
-                    gsap.to(input, { y: 0, duration: 0.3, ease: "power2.out" });
-                });
+            // Micro-interaction: cursor-aware glow on submit button
+            const btn = document.getElementById('submit-btn');
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                btn.style.background = `radial-gradient(circle at ${x}% 50%, #2a2a2a, #111 70%)`;
             });
-        };
+            btn.addEventListener('mouseleave', () => {
+                btn.style.background = '';
+            });
+        });
     </script>
 </body>
 </html>
