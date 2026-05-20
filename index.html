@@ -299,20 +299,13 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 
-        const firebaseConfig = {
-            projectId: "akbal-88788",
-            appId: "1:152432705627:web:960e6cd06a1af6bc663f7e",
-            storageBucket: "akbal-88788.firebasestorage.app",
-            apiKey: "AIzaSyCHwx66s-mBg3TeMThceSS9iWAyil9TvJQ",
-            authDomain: "akbal-88788.firebaseapp.com",
-            messagingSenderId: "152432705627"
-        };
+        const SUPABASE_URL = "https://flajbagcuwiibhetsmng.supabase.co";
+        const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C0cHWLnWv04H9lK4ofRQBg_uKMEGg9g";
+        const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        let currentLang = 'es';
 
         const i18n = {
             es: {
@@ -344,6 +337,7 @@
         };
 
         window.setLang = function(lang) {
+            currentLang = lang;
             const t = i18n[lang];
             document.documentElement.lang = lang;
             document.getElementById('hero-text').innerHTML = t.hero;
@@ -377,24 +371,29 @@
             loading.style.display = 'block';
 
             const formData = new FormData(form);
-            const data = {
-                createdAt: serverTimestamp(),
-                nombre: formData.get('nombre'),
-                instagram: formData.get('instagram'),
-                email: formData.get('email'),
-                whatsapp: formData.get('whatsapp'),
-                source: 'web_application'
+            const payload = {
+                nombre: (formData.get('nombre') || '').trim(),
+                instagram: (formData.get('instagram') || '').trim(),
+                email: (formData.get('email') || '').trim().toLowerCase(),
+                whatsapp: (formData.get('whatsapp') || '').trim(),
+                source: 'web_application',
+                locale: currentLang,
+                user_agent: (navigator.userAgent || '').slice(0, 1000) || null,
+                referrer: (document.referrer || '').slice(0, 2000) || null
             };
 
             try {
-                // Firebase Registration
-                await addDoc(collection(db, "talent_applications"), data);
-                
+                const { error } = await supabase
+                    .from('talent_applications')
+                    .insert(payload);
+
+                if (error) throw error;
+
                 form.reset();
                 loading.style.display = 'none';
                 successMsg.style.display = 'block';
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Submission error:', error);
                 loading.style.display = 'none';
                 submitBtn.style.display = 'block';
                 errorMsg.style.display = 'block';
