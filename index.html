@@ -12,14 +12,15 @@
     <style>
         :root {
             --bg: #ffffff;
-            --bg-tint: #fbfbfb;
-            --hairline: #f1f1f1;
-            --hairline-strong: #e6e6e6;
-            --ghost: #ededed;
-            --whisper: #d4d4d4;
-            --mid: #9a9a9a;
-            --ink: #111111;
-            --ink-soft: #2a2a2a;
+            --bg-tint: #fafafa;
+            --hairline: #e4e4e7;
+            --hairline-strong: #d4d4d8;
+            --ghost: #9ca3af;
+            --placeholder: #71717a;
+            --whisper: #3f3f46;
+            --mid: #27272a;
+            --ink: #09090b;
+            --ink-soft: #18181b;
             --serif: 'Cormorant Garamond', 'Cormorant', serif;
             --sans: 'Inter', system-ui, -apple-system, sans-serif;
         }
@@ -30,7 +31,7 @@
             font-family: var(--sans);
             color: var(--ink);
             min-height: 100vh;
-            font-weight: 300;
+            font-weight: 400;
             font-size: 15px;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
@@ -46,14 +47,14 @@
 
         ::selection { background: var(--ink); color: var(--bg); }
 
-        /* Subtle ambient gradient — barely perceptible, gives depth without breaking white */
+        /* Subtle ambient gradient — gives depth without breaking white */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(ellipse 90% 60% at 50% 0%, rgba(0,0,0,0.012), transparent 60%),
-                radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,0,0,0.008), transparent 60%);
+                radial-gradient(ellipse 90% 60% at 50% 0%, rgba(0,0,0,0.015), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,0,0,0.01), transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
@@ -66,9 +67,10 @@
             gap: 2px;
             z-index: 100;
             padding: 3px;
-            background: rgba(255,255,255,0.6);
-            border: 1px solid var(--hairline);
+            background: rgba(255,255,255,0.9);
+            border: 1px solid var(--hairline-strong);
             border-radius: 999px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             backdrop-filter: blur(8px);
         }
         .lang-btn {
@@ -78,15 +80,17 @@
             border: none;
             font-family: var(--sans);
             font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 2.5px;
+            font-weight: 600;
+            letter-spacing: 2px;
             cursor: pointer;
-            transition: color 0.4s ease;
+            transition: all 0.3s ease;
             border-radius: 999px;
         }
-        .lang-btn:hover { color: var(--mid); }
+        .lang-btn:hover { color: var(--ink); }
         .lang-btn.active {
             color: var(--ink);
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
 
         .container {
@@ -109,47 +113,52 @@
         }
         .subtitle {
             font-family: var(--sans);
-            font-size: 9px;
-            font-weight: 400;
+            font-size: 10px;
+            font-weight: 600;
             color: var(--whisper);
             text-transform: uppercase;
-            letter-spacing: 6px;
-            margin-bottom: 64px;
+            letter-spacing: 5px;
+            margin-bottom: 56px;
         }
 
         .hero-text {
             font-family: var(--serif);
-            font-size: clamp(1.15rem, 3.2vw, 1.4rem);
-            font-weight: 300;
-            color: var(--ink-soft);
-            line-height: 1.55;
+            font-size: clamp(1.2rem, 3.4vw, 1.5rem);
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.5;
             margin-bottom: 16px;
             letter-spacing: 0.005em;
         }
         .hero-text strong {
             font-style: italic;
-            font-weight: 400;
+            font-weight: 500;
             color: var(--ink);
         }
         .hero-text br + br { display: none; }
         .hero-sub {
             font-family: var(--sans);
-            font-size: 12.5px;
-            font-weight: 300;
+            font-size: 13.5px;
+            font-weight: 400;
             color: var(--mid);
-            line-height: 1.7;
+            line-height: 1.75;
             margin-bottom: 28px;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
         }
         .membership-note {
             display: block;
-            margin-top: 32px;
+            margin: 20px auto 0;
+            width: fit-content;
+            padding: 6px 16px;
+            background: #f4f4f5;
+            border: 1px solid var(--hairline-strong);
+            border-radius: 999px;
             font-family: var(--sans);
-            font-size: 9px;
+            font-size: 8.5px;
             color: var(--whisper);
             text-transform: uppercase;
-            letter-spacing: 4px;
-            font-weight: 400;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
 
         .metrics-bar {
@@ -168,27 +177,27 @@
         .metric-value {
             display: block;
             font-family: var(--serif);
-            font-size: 1.35rem;
-            font-weight: 400;
+            font-size: 1.45rem;
+            font-weight: 500;
             color: var(--ink);
             line-height: 1.2;
         }
         .metric-label {
             display: block;
             font-family: var(--sans);
-            font-size: 8px;
-            font-weight: 500;
+            font-size: 9px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.6px;
             color: var(--mid);
-            margin-top: 4px;
+            margin-top: 5px;
         }
 
         .divider {
             width: 32px;
             height: 1px;
             background: var(--hairline-strong);
-            margin: 48px auto 40px;
+            margin: 36px auto 32px;
         }
 
         .form-container {
@@ -202,19 +211,19 @@
         .input-group label {
             display: block;
             font-family: var(--sans);
-            font-size: 9px;
+            font-size: 10px;
             color: var(--whisper);
             margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 500;
+            letter-spacing: 2.5px;
+            font-weight: 600;
             transition: color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .input-group label.required::after {
             content: "*";
             margin-left: 5px;
             color: var(--ink);
-            font-weight: 400;
+            font-weight: 600;
             letter-spacing: 0;
         }
         .input-group input {
@@ -226,14 +235,15 @@
             color: var(--ink);
             font-family: var(--sans);
             font-size: 15px;
-            font-weight: 300;
+            font-weight: 400;
             letter-spacing: 0.01em;
             transition: border-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             border-radius: 0;
         }
         .input-group input::placeholder {
-            color: var(--ghost);
-            font-weight: 300;
+            color: var(--placeholder);
+            font-weight: 400;
+            opacity: 0.85;
         }
         .input-group input:focus {
             outline: none;
@@ -290,17 +300,18 @@
         .footer-tags {
             margin-top: 64px;
             font-family: var(--sans);
-            font-size: 9px;
+            font-size: 9.5px;
             color: var(--whisper);
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            font-weight: 400;
+            font-weight: 600;
         }
         .footer-tags::before, .footer-tags::after {
             content: "·";
             display: inline-block;
             margin: 0 10px;
-            color: var(--ghost);
+            color: var(--whisper);
+            font-weight: 700;
         }
 
         #loading, #success-message, #error-message {
