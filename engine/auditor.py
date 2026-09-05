@@ -7,15 +7,22 @@ OUTPUT_DIR = BASE_DIR / 'payloads' / 'audit_previews'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def generate_creator_audit(handle: str, name: str, current_followers: int,
-                           avg_reel_views: int, bio_platform: str = "OnlyFans") -> str:
+                           avg_reel_views: int, bio_platform: str = "Contenido Privado") -> str:
     """
-    Genera una tarjeta de auditoría visual de alto impacto para creadoras de contenido aspirantes.
-    Diseñada para ser enviada por Instagram DM o WhatsApp desde @akbal_mgt.
+    Genera una tarjeta de auditoría visual de alto impacto para creadoras de contenido latinas.
+    Diseñada para ser enviada por Instagram DM o Email desde @akbal_mgt.
     """
     clean_handle = handle.lstrip('@')
     target_followers = max(10000, int(current_followers * 4.5)) if current_followers < 2500 else current_followers + 15000
     target_views = max(35000, avg_reel_views * 8)
-    est_lost_revenue = "$650 - $1,800 USD" if current_followers < 3000 else "$1,500 - $3,500 USD"
+    est_lost_revenue = "$450 - $1,200 USD" if current_followers < 3000 else "$1,200 - $3,000 USD"
+    
+    if current_followers < 3000:
+        suggested_plan = "Plan Impulso ($97 USD/mes)"
+    elif current_followers < 15000:
+        suggested_plan = "Plan Autoridad Pro ($197 USD/mes)"
+    else:
+        suggested_plan = "Plan Élite Top 1% ($347 USD/mes)"
 
     html = f'''<!DOCTYPE html>
 <html lang="es">
@@ -114,7 +121,7 @@ def generate_creator_audit(handle: str, name: str, current_followers: int,
     <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
       <div>
         <p class="text-[9px] uppercase text-zinc-400 tracking-wider">Protocolo Sugerido</p>
-        <p class="text-xs font-semibold text-white">Tier 1: Creator Ignition</p>
+        <p class="text-xs font-semibold text-white">{suggested_plan}</p>
       </div>
       <a href="https://instagram.com/akbal_mgt" target="_blank"
          class="bg-white hover:bg-zinc-200 text-black text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
