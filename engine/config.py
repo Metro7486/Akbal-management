@@ -49,33 +49,47 @@ WHITELISTED_SERVICES = {
     }
 }
 
-# Paquetes comerciales oficiales de Akbal Management para Creadoras OnlyFans / Modelos
+# Paquetes comerciales oficiales de Akbal Management (Modelo BBB: Bueno, Bonito, Barato)
 CREATOR_PACKAGES = {
-    'TIER_1_IGNITION': {
-        'name': 'Creator Ignition (Social Proof Launch)',
-        'price_usd': 190.00,
-        'wholesale_est': 7.50,
-        'followers': 5000,
-        'reel_views': 50000,
-        'likes': 1500,
-        'target_audience': 'Aspirantes que recién abren OnlyFans o tienen <2K seguidores'
+    'FREE_TRIAL': {
+        'name': 'Micro-Prueba de Autoridad (24 Horas Gratis)',
+        'price_usd': 0.0,
+        'wholesale_est': 0.15,
+        'likes': 200,
+        'reel_views': 2000,
+        'custom_comments': 4,
+        'target_audience': 'Prospectos nuevos para eliminar desconfianza y cerrar al 100%'
     },
-    'TIER_2_PUSH': {
-        'name': 'Algorithmic Push (Top 10% Surge)',
-        'price_usd': 450.00,
-        'wholesale_est': 18.00,
-        'followers': 15000,
-        'reel_views': 150000,
-        'likes': 4000,
-        'target_audience': 'Creadoras activas con tráfico estancado en reels'
+    'LATAM_STARTER_49': {
+        'name': 'Plan Impulso Latam (Starter Antidesconfianza)',
+        'price_usd': 49.00,
+        'wholesale_est': 1.70,
+        'monthly_posts': 10,
+        'likes_per_post': 200,
+        'views_per_post': 1500,
+        'comments_per_post': 5,
+        'target_audience': 'Creadoras con <5K seguidores o que prueban por primera vez (Margen: 96.5%)'
     },
-    'TIER_3_ELITE': {
-        'name': 'Elite Talent Acceleration',
-        'price_usd': 950.00,
-        'wholesale_est': 42.00,
-        'followers': 35000,
-        'reel_views': 400000,
-        'likes': 10000,
-        'target_audience': 'Modelos y creadoras buscando estatus Top 1% y alianzas de agencia'
+    'LATAM_PRO_129': {
+        'name': 'Plan Autoridad Pro (Bestseller / Escalamiento)',
+        'price_usd': 129.00,
+        'wholesale_est': 15.12,
+        'followers_boost': 2000,
+        'monthly_posts': 20,
+        'likes_per_post': 500,
+        'views_per_post': 5000,
+        'comments_per_post': 12,
+        'target_audience': 'Creadoras de 3K a 25K seguidores que quieren monetizar en USD/EUR (Margen: 88.3%)'
+    },
+    'LATAM_ELITE_297': {
+        'name': 'Plan Élite Top 1% (Escala Millonaria)',
+        'price_usd': 297.00,
+        'wholesale_est': 41.30,
+        'followers_boost': 5000,
+        'monthly_posts': 30,
+        'likes_per_post': 1000,
+        'views_per_post': 15000,
+        'comments_per_post': 25,
+        'target_audience': 'Modelos e influencers que facturan >$1,000 USD y buscan dominio total (Margen: 86.1%)'
     }
 }

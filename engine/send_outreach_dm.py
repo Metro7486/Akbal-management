@@ -173,12 +173,11 @@ if __name__ == '__main__':
     parser.add_argument('--country', default='Chile', help='País de la creadora')
     args = parser.parse_args()
     
-    # Generate tailored pitch
     pitch = (
         f"Hola {args.name}, qué tal. Te escribimos desde la dirección de @akbal_mgt (57K).\n\n"
-        f"Estuvimos viendo tu perfil y tu contenido fotográfico y de pasarela tiene un estándar estético altísimo. Sin embargo, notamos que tu cuenta tiene {args.followers:,} seguidores y el algoritmo te tiene limitada en la retención de Reels, cuando el tráfico de mayor valor para creadoras independientes proviene de audiencias internacionales en Estados Unidos y Europa.\n\n"
-        f"Tenemos un protocolo de aceleración diseñado para modelos y creadoras latinas: posicionamos tu cuenta con autoridad digital y comentarios estratégicos para atraer suscriptores con alto poder adquisitivo, y tú conservas el 100% de tus ingresos (sin comisiones del 50%).\n\n"
-        f"Te preparamos un diagnóstico visual de 2 minutos para destrabar tu alcance. ¿Te gustaría revisarlo por aquí o a tu correo?"
+        f"Estuvimos viendo tu contenido y tiene calidad evidente de Top 1%, pero el algoritmo te tiene limitada a tráfico local, cuando los ingresos reales en plataformas privadas provienen de suscriptores en Estados Unidos y Europa.\n\n"
+        f"Sabemos que en internet abundan las promesas vacías. Para que veas resultados reales antes de evaluar nada, te ofrecemos una prueba 100% gratuita en tu propia cuenta: mándanos el link de tu último Reel y en 15 minutos le inyectamos 200 likes y comentarios estratégicos en español.\n\n"
+        f"Si te gusta cómo responde el algoritmo, evaluamos darte acceso a nuestros planes desde $49 USD/mes (100% de tus ingresos para ti). ¿Cuál es el link de tu Reel más reciente?"
     )
     
     asyncio.run(send_dm(args.handle, pitch))

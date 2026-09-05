@@ -10,31 +10,31 @@ PITCH DE PROSPECCIÓN PARA CREADORAS LATINAS (@akbal_mgt // 57K SEGUIDORES)
 OBJETIVO: @{clean_handle} ({first_name}) | Región: {country}
 ========================================================================
 
---- OPCIÓN 1: GANCHO INTERNACIONAL (EL DOLOR DE SOLO ATRAER SEGUIDORES LOCALES QUE NO PAGAN) ---
+--- OPCIÓN 1: EL CABALLO DE TROYA (MICRO-PRUEBA GRATIS EN VIVO - MÁXIMA CONVERSIÓN) ---
 
 Hola {first_name}, qué tal. Te escribimos desde la dirección de @akbal_mgt (57K).
 
-Estuvimos viendo tu perfil y tu contenido estético tiene calidad de Top 1%. Sin embargo, notamos que tu cuenta tiene {followers:,} seguidores y el algoritmo te tiene limitada a tráfico local, cuando el 85% del dinero real en plataformas privadas proviene de suscriptores en Estados Unidos, Canadá y Europa.
+Estuvimos viendo tu perfil y tu contenido estético tiene calidad de Top 1%, pero notamos que tu cuenta tiene {followers:,} seguidores y el algoritmo te tiene limitada a tráfico local, cuando el dinero real en plataformas privadas proviene de suscriptores en Estados Unidos y Europa.
 
-Tenemos un protocolo de aceleración diseñado especialmente para creadoras latinas: posicionamos tu cuenta con autoridad digital y comentarios estratégicos para atraer público con alto poder adquisitivo, sin tocar ni quedarnos con tus comisiones (te quedas con el 100% de tus ingresos).
+Sabemos que en internet hay mucha estafa y desconfianza. Para que no tengas que creer en palabras, hagamos una prueba 100% gratis en tu propia cuenta sin que pongas un solo centavo: mándanos el enlace de tu último Reel o publicación y en menos de 20 minutos le inyectamos 200 likes y comentarios estratégicos para que veas cómo reacciona el algoritmo en tiempo real.
 
-Te armamos un diagnóstico visual rápido de 2 minutos para destrabar tu alcance. ¿Te gustaría revisarlo por aquí o por correo?
+Si te gusta lo que ves, hablamos de nuestros planes mensuales (desde $49 USD/mes con 100% de retención de tus ganancias). Si no, te quedas con el alcance gratis. ¿Cuál es el link de tu Reel más reciente?
 
 
---- OPCIÓN 2: ENFOQUE AGENCIA LIBRE (CONTRA LAS AGENCIAS TRADICIONALES QUE COBRAN 50%) ---
+--- OPCIÓN 2: ENFOQUE AGENCIA LIBRE (CONTRA LAS AGENCIAS QUE COBRAN 50%) ---
 
 Hola {first_name}. Un saludo desde Akbal Management (@akbal_mgt).
 
-Sabemos que muchas agencias en Latinoamérica intentan quitarte entre el 40% y 50% de tus ganancias para 'manejarte' las redes. En Akbal operamos diferente: te damos la infraestructura de autoridad (57K), optimización de perfil y semillado algorítmico por una tarifa fija accesible en dólares/USDT, y tú conservas el 100% del control y de tus suscripciones.
+Sabemos que muchas agencias en Latinoamérica intentan quitarte entre el 40% y 50% de tus ganancias para 'manejarte' las redes. En Akbal operamos diferente: te damos infraestructura de autoridad (57K), optimización de perfil y semillado algorítmico por una tarifa fija accesible desde $49 USD/mes, y tú conservas el 100% del control y de tus suscripciones.
 
-Detectamos 2 ajustes inmediatos en tus Reels y en tu enlace que te están costando seguidores de alto valor. ¿Te los comparto por aquí?
+Podemos hacer una prueba gratuita en tu último Reel para que veas la calidad antes de decidir cualquier cosa. ¿Te gustaría probarlo?
 
 
 --- OPCIÓN 3: ENFOQUE BLINDAJE & ALTO ESTATUS (CORTO Y DIRECTO) ---
 
-Hola {first_name}. Vemos tu perfil desde la dirección de @akbal_mgt. Tu estética fotográfica es impecable, pero tu interacción actual está frenando la conversión a tus enlaces privados.
+Hola {first_name}. Vemos tu perfil desde la dirección de @akbal_mgt (57K). Tu estética fotográfica es impecable, pero tu interacción actual está frenando la conversión a tus enlaces privados.
 
-Contamos con cupos limitados este mes en nuestro programa de aceleración para creadoras independientes de Latinoamérica. Paquetes desde $97 USD/mes para blindar tu perfil contra shadowbans y multiplicar tus clics.
+Contamos con cupos limitados este mes en nuestro programa de aceleración para creadoras independientes de Latinoamérica. Planes BBB desde $49 USD/mes con micro-prueba inicial gratuita de 24 horas sin tarjeta.
 
 Si estás activa recibiendo propuestas de crecimiento para tu marca este mes, te comparto los detalles sin compromiso. Un saludo.
 ========================================================================

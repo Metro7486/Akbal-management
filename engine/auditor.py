@@ -18,11 +18,11 @@ def generate_creator_audit(handle: str, name: str, current_followers: int,
     est_lost_revenue = "$450 - $1,200 USD" if current_followers < 3000 else "$1,200 - $3,000 USD"
     
     if current_followers < 3000:
-        suggested_plan = "Plan Impulso ($97 USD/mes)"
+        suggested_plan = "Plan Impulso ($49 USD/mes)"
     elif current_followers < 15000:
-        suggested_plan = "Plan Autoridad Pro ($197 USD/mes)"
+        suggested_plan = "Plan Autoridad Pro ($129 USD/mes)"
     else:
-        suggested_plan = "Plan Élite Top 1% ($347 USD/mes)"
+        suggested_plan = "Plan Élite Top 1% ($297 USD/mes)"
 
     html = f'''<!DOCTYPE html>
 <html lang="es">
