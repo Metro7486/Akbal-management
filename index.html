@@ -541,7 +541,7 @@
         });
 
         // ============ PREMIUM ENTRANCE ANIMATIONS ============
-        window.addEventListener('load', () => {
+        function initAnimations() {
             gsap.to('body', { opacity: 1, duration: 0.4, ease: 'power1.out' });
 
             const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
@@ -605,15 +605,24 @@
 
             // Micro-interaction: cursor-aware glow on submit button
             const btn = document.getElementById('submit-btn');
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                btn.style.background = `radial-gradient(circle at ${x}% 50%, #2a2a2a, #111 70%)`;
-            });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.background = '';
-            });
-        });
+            if (btn) {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    btn.style.background = `radial-gradient(circle at ${x}% 50%, #2a2a2a, #111 70%)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.background = '';
+                });
+            }
+        }
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            initAnimations();
+        } else {
+            window.addEventListener('DOMContentLoaded', initAnimations);
+            window.addEventListener('load', initAnimations);
+        }
     </script>
 </body>
 </html>
