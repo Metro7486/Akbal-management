@@ -1,1 +1,10 @@
 .vercel
+.env
+.env.*
+__pycache__/
+*.pyc
+leads/
+payloads/audit_previews/
+.DS_Store
+Thumbs.db
+
