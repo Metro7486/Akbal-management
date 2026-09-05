@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akbal Management | Talent Application</title>
-    <meta name="description" content="Akbal Management — Talent Application.">
+    <title>Akbal Management | Talent & Digital Authority</title>
+    <meta name="description" content="Akbal Management — Agencia boutique de aceleración de autoridad digital y representación para creadoras de OnlyFans e independientes.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -150,6 +150,38 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             font-weight: 400;
+        }
+
+        .metrics-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 28px 0 32px;
+            padding: 16px 8px;
+            border-top: 1px solid var(--hairline-strong);
+            border-bottom: 1px solid var(--hairline-strong);
+        }
+        .metric-col {
+            flex: 1;
+            text-align: center;
+        }
+        .metric-value {
+            display: block;
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+        .metric-label {
+            display: block;
+            font-family: var(--sans);
+            font-size: 8px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--mid);
+            margin-top: 4px;
         }
 
         .divider {
@@ -321,6 +353,21 @@
 
         <p class="hero-text reveal" id="hero-text"></p>
 
+        <div class="metrics-bar reveal">
+            <div class="metric-col">
+                <span class="metric-value">57K+</span>
+                <span class="metric-label" id="metric-reach"></span>
+            </div>
+            <div class="metric-col">
+                <span class="metric-value">Top 1%</span>
+                <span class="metric-label" id="metric-conversion"></span>
+            </div>
+            <div class="metric-col">
+                <span class="metric-value">100%</span>
+                <span class="metric-label" id="metric-control"></span>
+            </div>
+        </div>
+
         <div class="divider reveal" aria-hidden="true"></div>
 
         <div class="form-container reveal">
@@ -348,7 +395,7 @@
             <div id="error-message"></div>
         </div>
 
-        <div class="footer-tags reveal">Tulum &nbsp;·&nbsp; Riviera Maya &nbsp;·&nbsp; Cancun</div>
+        <div class="footer-tags reveal" id="footer-tags-text"></div>
     </div>
 
     <script type="module">
@@ -362,32 +409,42 @@
 
         const i18n = {
             es: {
-                hero: 'Conviértete en una <strong>Arquitecta de Experiencias</strong>.',
-                heroSub: 'Únete a la agencia de Social Concierge más exclusiva. Ingresa tus datos para ser considerada en nuestra próxima fase de selección.<span class="membership-note">Membership by application only</span>',
+                hero: 'Acelera tu Autoridad al <strong>Top 1%</strong>.',
+                heroSub: 'Agencia boutique de aceleración digital y gestión de talento para creadoras independientes. Escalamos tu audiencia en OnlyFans e Instagram mediante semillado algorítmico, retención de alto ticket y autoridad indiscutible sin ceder tus ingresos.<span class="membership-note">Roster exclusivo · Admisión sujeta a auditoría</span>',
+                metricReach: 'Red de Autoridad',
+                metricConversion: 'Monetización Top 1%',
+                metricControl: 'Control & Privacidad',
                 labelName: 'Nombre Completo',
-                placeholderName: 'Tu nombre completo',
-                labelInstagram: 'Instagram',
-                placeholderInstagram: '@tu_usuario',
+                placeholderName: 'Tu nombre o alias de creadora',
+                labelInstagram: 'Instagram / Enlace de Contenido',
+                placeholderInstagram: '@tu_usuario (o link de OnlyFans/Beacons)',
                 labelEmail: 'Correo Electrónico',
+                placeholderEmail: 'tu@email.com',
                 labelWhatsapp: 'WhatsApp (Con código de país)',
-                submit: 'Solicitar Acceso',
-                loading: 'Procesando solicitud...',
-                success: '“Solicitud recibida.<br>Nos pondremos en contacto contigo.”',
-                error: 'Hubo un error al enviar tus datos. Intenta de nuevo.'
+                submit: 'Solicitar Auditoría & Acceso',
+                loading: 'Procesando postulación...',
+                success: '“Postulación recibida.<br>Nuestro equipo auditará tus métricas y te contactará por WhatsApp.”',
+                error: 'Hubo un error al enviar tus datos. Intenta de nuevo.',
+                footerTags: 'OnlyFans & Social Growth &nbsp;·&nbsp; Digital Authority &nbsp;·&nbsp; Worldwide Representation'
             },
             en: {
-                hero: 'Become an <strong>Experience Architect</strong>.',
-                heroSub: 'Join the most exclusive Social Concierge agency. Enter your details to be considered for our next selection phase.<span class="membership-note">Membership by application only</span>',
+                hero: 'Scale Your Authority to the <strong>Top 1%</strong>.',
+                heroSub: 'Boutique digital authority and talent acceleration agency for independent creators. We scale your OnlyFans and Instagram audience through algorithmic seeding, high-ticket subscriber retention, and undeniable social proof without surrendering your independence.<span class="membership-note">Exclusive roster · Admission subject to audit</span>',
+                metricReach: 'Authority Network',
+                metricConversion: 'Top 1% Monetization',
+                metricControl: 'Control & Privacy',
                 labelName: 'Full Name',
-                placeholderName: 'Your full name',
-                labelInstagram: 'Instagram',
-                placeholderInstagram: '@your_handle',
+                placeholderName: 'Your name or creator alias',
+                labelInstagram: 'Instagram / Content Link',
+                placeholderInstagram: '@your_handle (or OnlyFans/Beacons link)',
                 labelEmail: 'Email Address',
+                placeholderEmail: 'you@email.com',
                 labelWhatsapp: 'WhatsApp (With country code)',
-                submit: 'Request Access',
-                loading: 'Processing request...',
-                success: '“Application received.<br>We will be in touch.”',
-                error: 'There was an error submitting your info. Please try again.'
+                submit: 'Request Growth Audit',
+                loading: 'Processing application...',
+                success: '“Application received.<br>Our directors will review your metrics and reach out on WhatsApp.”',
+                error: 'There was an error submitting your info. Please try again.',
+                footerTags: 'OnlyFans & Social Growth &nbsp;·&nbsp; Digital Authority &nbsp;·&nbsp; Worldwide Representation'
             }
         };
 
@@ -406,6 +463,9 @@
             document.documentElement.lang = lang;
             document.getElementById('hero-text').innerHTML = t.hero;
             heroSubEl.innerHTML = t.heroSub;
+            document.getElementById('metric-reach').textContent = t.metricReach;
+            document.getElementById('metric-conversion').textContent = t.metricConversion;
+            document.getElementById('metric-control').textContent = t.metricControl;
             document.getElementById('label-name').textContent = t.labelName;
             document.getElementById('name').placeholder = t.placeholderName;
             document.getElementById('label-instagram').textContent = t.labelInstagram;
@@ -416,6 +476,7 @@
             document.getElementById('loading').textContent = t.loading;
             document.getElementById('success-message').innerHTML = t.success;
             document.getElementById('error-message').textContent = t.error;
+            document.getElementById('footer-tags-text').innerHTML = t.footerTags;
             document.getElementById('btn-es').classList.toggle('active', lang === 'es');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
         }
@@ -510,6 +571,11 @@
                 { opacity: 0, y: 8 },
                 { opacity: 1, y: 0, duration: 0.9 },
                 0.95
+            );
+            tl.fromTo('.metrics-bar',
+                { opacity: 0, y: 10 },
+                { opacity: 1, y: 0, duration: 0.9 },
+                1.05
             );
             tl.fromTo('.divider',
                 { opacity: 0, scaleX: 0 },
