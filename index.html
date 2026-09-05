@@ -395,10 +395,6 @@
                     <label for="email" id="label-email" class="required"></label>
                     <input type="email" id="email" name="email" required placeholder="tu@email.com">
                 </div>
-                <div class="input-group">
-                    <label for="whatsapp" id="label-whatsapp" class="required"></label>
-                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="+52 123 456 7890">
-                </div>
                 <button type="submit" class="submit-btn" id="submit-btn"></button>
             </form>
             <div id="loading"></div>
@@ -431,10 +427,9 @@
                 placeholderInstagram: '@tu_usuario (o link a tu perfil/Beacons)',
                 labelEmail: 'Correo Electrónico',
                 placeholderEmail: 'tu@email.com',
-                labelWhatsapp: 'WhatsApp (Con código de país)',
                 submit: 'Solicitar Auditoría & Acceso',
                 loading: 'Procesando postulación...',
-                success: '“Postulación recibida.<br>Nuestro equipo auditará tus métricas y te contactará por WhatsApp.”',
+                success: '“Postulación recibida.<br>Nuestro equipo auditará tus métricas y te contactará directamente por Instagram o correo electrónico.”',
                 error: 'Hubo un error al enviar tus datos. Intenta de nuevo.',
                 footerTags: 'Creator Growth &nbsp;·&nbsp; Digital Authority &nbsp;·&nbsp; Worldwide Representation'
             },
@@ -450,10 +445,9 @@
                 placeholderInstagram: '@your_handle (or profile/Beacons link)',
                 labelEmail: 'Email Address',
                 placeholderEmail: 'you@email.com',
-                labelWhatsapp: 'WhatsApp (With country code)',
                 submit: 'Request Growth Audit',
                 loading: 'Processing application...',
-                success: '“Application received.<br>Our directors will review your metrics and reach out on WhatsApp.”',
+                success: '“Application received.<br>Our directors will review your metrics and reach out via Instagram Direct or email.”',
                 error: 'There was an error submitting your info. Please try again.',
                 footerTags: 'Creator Growth &nbsp;·&nbsp; Digital Authority &nbsp;·&nbsp; Worldwide Representation'
             }
@@ -482,7 +476,6 @@
             document.getElementById('label-instagram').textContent = t.labelInstagram;
             document.getElementById('instagram').placeholder = t.placeholderInstagram;
             document.getElementById('label-email').textContent = t.labelEmail;
-            document.getElementById('label-whatsapp').textContent = t.labelWhatsapp;
             document.getElementById('submit-btn').textContent = t.submit;
             document.getElementById('loading').textContent = t.loading;
             document.getElementById('success-message').innerHTML = t.success;
@@ -513,7 +506,7 @@
                 nombre: (formData.get('nombre') || '').trim(),
                 instagram: (formData.get('instagram') || '').trim(),
                 email: (formData.get('email') || '').trim().toLowerCase(),
-                whatsapp: (formData.get('whatsapp') || '').trim(),
+                whatsapp: null,
                 source: 'web_application',
                 locale: currentLang,
                 user_agent: (navigator.userAgent || '').slice(0, 1000) || null,
